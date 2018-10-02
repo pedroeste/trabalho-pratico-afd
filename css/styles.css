@@ -1,0 +1,9 @@
+.aceita {
+    color: green;
+    display: none;
+}
+
+.nao-aceita {
+    display: none;
+    color: red;
+}
