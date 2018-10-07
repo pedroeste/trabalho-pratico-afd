@@ -82,7 +82,6 @@ function checkString(){
             break;
 
         case 'num':
-            // console.log(/([0-9])([0-9])*|([0-9])([0-9])*\'.'[0-9]([0-9])*]/.test(lastChar))
             if(/[0-9]/.test(lastChar) || lastChar == '.'){
                 if(lastChar == '.' && !dotCounter){
                     dotCounter = true;
