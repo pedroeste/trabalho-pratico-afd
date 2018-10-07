@@ -1,111 +1,127 @@
+let identificador = /([a-z]|[0-9]|[_])*/g;
+let numero = /([0-9])*|([0-9])*'.'[0-9]([0-9])*]/g;
+let dotCounter = false;
+
 let input = document.querySelector('#afd');
-let aceito = document.querySelector('.aceita');
+let divAceito = document.querySelector('.aceita');
 let naoAceito = document.querySelector('.nao-aceita');
 
 let pComprimento = document.querySelector('.comprimento');
 let pTexto = document.querySelector('.texto');
 let pUltimoChar = document.querySelector('.ultimo-char');
-let pKeycodeChar = document.querySelector('.keycode-char');
 let pCharIgual = document.querySelector('.char-igual');
 
-let caseValue;
-let attrSymbol = false;
+let caseValue = 'char';
 
-let firstChar = /[a-z]/;
+function lixo(){
+    naoAceito.style.display = 'block';
+    input.disabled = true;
+}
 
-function checkString() {
-	var inputValue = this.value;
-	var lastChar = inputValue[inputValue.length-1];
+function aceito(){
+    divAceito.style.display = 'block';
+    input.disabled = true;
+}
 
-	//PRINT NA TELA
-	pTexto.innerHTML = `String do input: ${inputValue}`;
-	pComprimento.innerHTML = `Comprimento da string: ${inputValue.length}`;	
+function checkString(){
+    var inputValue = this.value;
+    var lastChar = inputValue[inputValue.length-1];
+    
+    pTexto.innerHTML = `String do input: ${inputValue}`;
+    pComprimento.innerHTML = `Comprimento da string: ${inputValue.length}`;
+    
+    switch(caseValue){
+        case 'char':
+            if(/[a-z]/.test(lastChar)){
+                caseValue = 'identificador';
 
-	
-	if(inputValue.length <= 1){
-		
-		console.log(firstChar.test(inputValue));
+            } else {
+                lixo();
 
-		if(firstChar.test(inputValue)){
-			caseValue = 'pass';
+            }
+            break;
+        
+        case 'identificador':
+            if(/([a-z]|[0-9]|[_])/.test(lastChar)){
+                caseValue = 'identificador';
 
-		} else {
-			caseValue = 'lixo';
+            } else if(lastChar == '='){
+                caseValue = 'attr';
 
-		}
+            } else {
+                lixo();
+            }
+            break;
 
-	} else if(lastChar != '=' && !attrSymbol){
-		var identifier = /[0-9a-zA-Z|_|\s]/;
+        case 'attr':
+            if(/[a-z]/.test(lastChar)){
+                caseValue = 'identificador_dois';
 
-		// PRINT NA TELA
-		pUltimoChar.innerHTML = `Último char digitado: ${lastChar}`;
-		pKeycodeChar.innerHTML = `KeyCode do char: ${lastChar.charCodeAt(0)}`;
-		console.log(identifier.test(lastChar));
+            } else if(/[0-9]/.test(lastChar)){
+                caseValue = 'num';
 
-		if(!identifier.test(lastChar)){
-			caseValue = 'lixo';
-		}
+            } else {
+                lixo();
+            }
+            break;
 
-		// se o ultimo caracter digitado for um '=' e não tiver nenhum '=' na string:
-	} else if(lastChar == '='){
-		if(!attrSymbol){
-			// PRINT NA TELA
-			pCharIgual.innerHTML = `String é um = e não existe = na string'`;
-			attrSymbol = true;
-		} else {
-			pCharIgual.innerHTML = `String é um = e já existe = na string`;
-			caseValue = 'lixo';
-		}
-		
-		// Se ja houver pelo menos um '=' no código e o ultimo caracter digitado for diferente de '=':
-	} else if(lastChar != '=' && attrSymbol) {
-		pCharIgual.innerHTML = `String diferente de = e já existe um =`;
-		if(firstChar.test(inputValue)){
-			caseValue = 'pass';
-			if(lastChar == ';'){
-				caseValue = 'aceito';
-			}
+        case 'identificador_dois':
+            if(lastChar == ';'){
+                aceito();
 
-		} else {
-			caseValue = 'lixo';
+            } else if(/([a-z]|[0-9]|[_])/.test(lastChar)){
+                caseValue = 'identificador_dois';
 
-		}
-	}
+            } else if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/'){
+                caseValue = 'operador';
 
+            } else {
+                lixo();
 
+            }
+            break;
 
+        case 'num':
+            // console.log(/([0-9])([0-9])*|([0-9])([0-9])*\'.'[0-9]([0-9])*]/.test(lastChar))
+            if(/[0-9]/.test(lastChar) || lastChar == '.'){
+                if(lastChar == '.' && !dotCounter){
+                    dotCounter = true;
 
+                } else if(lastChar == '.' && dotCounter) {
+                    lixo();
 
+                }
+                
+                caseValue = 'num';
 
+            } else if(lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/'){
+                if(dotCounter){
+                    dotCounter = false;
+                }
+                caseValue = 'operador';
 
+            } else if(lastChar == ';'){
+                aceito();
 
+            } else {
+                lixo();
 
+            }
+            break;
 
+        case 'operador':
+            if(/[a-z]/.test(lastChar)){
+                caseValue = 'identificador_dois';
 
+            } else if(/[0-9]/.test(lastChar)){
+                caseValue = 'num';
 
-
-
-
-
-
-
-
-	switch(caseValue) {
-		case 'pass':
-			break;
-
-		case 'aceito':
-			aceito.style.display = 'block';
-			input.disabled = true;
-			break;
-		
-		case 'lixo':
-			naoAceito.style.display = 'block';
-			input.disabled = true;
-			break;
-	}
-
-	console.log('');
+            } else {
+                lixo();
+            }
+            break;
+    };
+    console.log('');
 }
 
 input.addEventListener('keyup', checkString);
