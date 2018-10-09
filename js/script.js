@@ -8,8 +8,6 @@ let naoAceito = document.querySelector('.nao-aceita');
 
 let pComprimento = document.querySelector('.comprimento');
 let pTexto = document.querySelector('.texto');
-let pUltimoChar = document.querySelector('.ultimo-char');
-let pCharIgual = document.querySelector('.char-igual');
 
 let caseValue = 'char';
 
@@ -120,7 +118,6 @@ function checkString(){
             }
             break;
     };
-    console.log('');
 }
 
 input.addEventListener('keyup', checkString);
