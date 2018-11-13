@@ -1,9 +1,9 @@
-.aceita {
+.aceita, .aceita2 {
     color: green;
     display: none;
 }
 
-.nao-aceita {
+.nao-aceita, .nao-aceita2 {
     display: none;
     color: red;
 }

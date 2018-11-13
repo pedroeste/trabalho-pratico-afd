@@ -2,6 +2,21 @@ let caseValue = 'for';
 let numCounter = false;
 let forCounter = 0;
 
+let input = document.querySelector('#afd2');
+let divAceito = document.querySelector('.aceita2');
+let naoAceito = document.querySelector('.nao-aceita2');
+
+function abreParentese(){
+	input.value = input.value + '(';
+	testString(this, input.value)
+	caseValue = 'char';
+}
+
+function fechaParentese(){
+	input.value = input.value + ')';
+	caseValue = '';
+}
+
 function lixo(){
     naoAceito.style.display = 'block';
     input.disabled = true;
@@ -12,8 +27,13 @@ function aceito(){
     input.disabled = true;
 }
 
-function testString(){
-	var inputValue = this.value;
+function testString(t, input=null){
+	if(input == null){
+		var inputValue = this.value;
+	} else {
+		var inputValue = input;
+	}
+	
 	var lastChar = inputValue[inputValue.length-1];
 	
 	switch(caseValue){
