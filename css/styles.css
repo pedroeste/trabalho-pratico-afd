@@ -8,6 +8,24 @@
     color: red;
 }
 
+.estado {
+  border-radius: 50%;
+  border: white 1px solid;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.estado-final {
+  border-radius: 50%;
+  border: white 1px solid;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .quotes {display: none; }
 
 @import url(https://fonts.googleapis.com/css?family=Oxygen);
