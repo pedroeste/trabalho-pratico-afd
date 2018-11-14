@@ -13,8 +13,37 @@
 <body>
     <h1>Linguagens Formais e Autômatos</h1>
 
-    <input id="afd" type="text">
-    <button id="reset-button" onclick="resetString()">Resetar</button>
+    <div class="flex-container">
+        <div>
+            <input placeholder="Digita uma string" id="afd" type="text">
+            <button id="reset-button" onclick="resetString()">Resetar</button>
+            <p class="legenda">Digite uma string de atribuição, não há necessidade de utilizar espaços. Ao lado há exemplos de strings aceitas e não aceitas.</p>
+        </div>
+        <div class="flex-container">
+            <div class="string-aceita">
+                <p>Strings Aceitas:</p>
+                <ul>
+                    <li>a=a;</li>
+                    <li>a=27.5;</li>
+                    <li>a=a+b;</li>
+                    <li>a=a-25;</li>
+                    <li>a=25*32;</li>
+                    <li>var=numero_1/25;</li>
+                </ul>
+            </div>
+            <div class="string-nao-aceita">
+                <p>Strings Não Aceitas:</p>
+                <ul>
+                    <li>a=a+;</li>
+                    <li>9=18+a;</li>
+                    <li>a==33;</li>
+                    <li>a=a++;</li>
+                    <li>a=25.48.</li>
+                    <li>var=25/_ab;</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <h3 class="aceita">String Aceita</h3>
     <h3 class="nao-aceita">String Não Aceita</h3>
@@ -23,6 +52,7 @@
     <p class="texto"></p>
 
     <div id="estados-automato"></div>
+    <br><br><br>
 
 </body>
 

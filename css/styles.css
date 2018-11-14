@@ -702,6 +702,41 @@ body {
           transform: translate(-50%, -50%);
 }
 
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.flex-container > div {
+  width: 50%;
+  margin: 10px;
+}
+
+ul {
+  list-style-type: none;
+  font-size: 14px;
+}
+
+.string-aceita {
+  text-align: left;
+}
+
+.string-aceita p {
+  color: green;
+}
+
+.string-nao-aceita {
+  text-align: left;
+}
+
+.string-nao-aceita p {
+  color: red;
+}
+
+.legenda {
+  font-size: 15px;
+}
+
 .txt {
   display: block;
 }
